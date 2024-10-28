@@ -56,6 +56,7 @@ export const placeBid = async(req,res,next)=>{
                 bidder:{
                     id:bidderDetails._id,
                     userName:bidderDetails.userName,
+                    email:bidderDetails.email,
                     profileImage: bidderDetails.profileImage?.url
                 },
                 auctionItem:auctionItem._id,

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import ErrorHandler from "../middlewares/error.js";
 import { Auction } from "../models/auctionSchema.js";
+import { Bid } from "../models/bidSchema.js";
 import { User } from "../models/userScema.js";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -207,8 +208,17 @@ export const republishItem = async(req,res,next)=>{
     return next(new ErrorHandler('Start time must be smaller than end time',400));
   }
 
+  if(auctionItem.highestBidder)
+  {
+    const highestBidder = await User.findById(auctionItem.highestBidder);
+    highestBidder.moneySpent -= auctionItem.currentBid;
+    highestBidder.auctionsWon -= 1;
+    await highestBidder.save();
+  }
   data.bids=[];
   data.commissionCalculated=false;
+  data.currentBid=0;
+  data.highestBidder=null;
 
   auctionItem = await Auction.findByIdAndUpdate(id,data,{
     new:true,
@@ -216,6 +226,7 @@ export const republishItem = async(req,res,next)=>{
     useFindAndModify: false,
   })
 
+  await Bid.deleteMany({auctionItem:auctionItem._id});
   const createdBy = await User.findByIdAndUpdate(req.user._id,{unpaidCommission:0},{
     runValidators:false,
     new:true,

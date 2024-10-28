@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
         type:String,
         selected:false,
         minLength: [6,'password must contain atleast 3 characters'],
-        maxLength: [32,'password cannot exceed 40 characters'],
     },
     email: String,
     address: String,
@@ -35,7 +34,7 @@ const userSchema = new mongoose.Schema({
     },
     paymentMetods:{
         bankTransfer:{
-            bankAccountNumeber: String,
+            bankAccountNumber: String,
             bankAccountName: String,
             bankName: String,
         },

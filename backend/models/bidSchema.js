@@ -9,6 +9,7 @@ const bidSchema = new mongoose.Schema({
             required: true,
         },
         userName:String,
+        email:String,
         profileImage: String,
     },
     auctionItem:{
