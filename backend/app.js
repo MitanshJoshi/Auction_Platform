@@ -23,7 +23,7 @@ config({
 app.use(cors({
     origin:[process.env.FRONTEND_URL],
     methods: ["POST", "GET", "PUT", "DELETE"],
-    Credentials:true,
+    credentials:true,
 }))
 
 

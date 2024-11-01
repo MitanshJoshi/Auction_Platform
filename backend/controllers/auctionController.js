@@ -146,7 +146,7 @@ export const getMyAuctions = async(req,res,next)=>{
     return next(new ErrorHandler("User not Authenticated",400));
   }
 
-  const auctions = await Auction.find({createdBy:userId});
+  const auctions = await Auction.find({ createdBy:userId });
   return res.status(200).json({
     success:true,
     auctions
