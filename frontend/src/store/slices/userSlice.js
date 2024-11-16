@@ -13,6 +13,20 @@ const userSlice = createSlice({
     },
 
     reducers:{
+        fetchLeaderboardRequest(state,action)
+        {
+            state.loading=true;
+        },
+        fetchLeaderboardSuccess(state,action)
+        {
+            state.loading=false;
+            state.leaderboard=action.payload;
+        },
+        fetchLeaderboardFailed(state,action)
+        {
+            state.loading=false;
+            state.leaderboard=[];
+        },
         fetchUser(state,action)
         {
             state.loading=true,
@@ -70,6 +84,7 @@ const userSlice = createSlice({
         logoutSuccess(state,action)
         {
             state.isAuthenticated=false;
+            state.loading=false,
             state.user={};
         },
         logoutFailed(state,action)
@@ -127,17 +142,16 @@ export const login = (data,navigate) => async(dispatch)=>{
 
 }
 
-
-export const logout=async(dispatch,navigate)=>{
+export const logout = (dispatch,navigate)=> async() =>{
     try {
         const response = await axios.post("/api/v1/user/logout");
         dispatch(userSlice.actions.logoutSuccess());
         toast.success(response.data.message);
-        navigate('/');
+        navigate('/login');
         dispatch(userSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(userSlice.actions.logoutFailed());
-        toast.error(error.data.message);
+        toast.error(error.response.data.message);
         dispatch(userSlice.actions.clearAllErrors());
     }
 }
@@ -153,6 +167,21 @@ export const GetUser = () => async(dispatch) =>{
         dispatch(userSlice.actions.clearAllErrors());
     }
 
+}
+
+
+
+export const fetchLeaderboard=()=>async(dispatch)=>{
+    dispatch(userSlice.actions.fetchLeaderboardRequest());
+    try {
+        const response = await axios.get("/api/v1/user/leaderboard");
+        dispatch(userSlice.actions.fetchLeaderboardSuccess(response.data.users));
+        dispatch(userSlice.actions.clearAllErrors());
+    } catch (error) {
+        dispatch(userSlice.actions.fetchLeaderboardFailed());
+        console.log(error);
+        dispatch(userSlice.actions.clearAllErrors());
+    }
 }
 
 

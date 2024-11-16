@@ -131,10 +131,11 @@ export const getAuctionDetails=async(req,res,next)=>{
       message:"No Auction Found"
     })
   }
-
+  const bidders = auctionItem.bids.sort((a, b) => b.amount - a.amount);
   return res.status(200).json({
     success:true,
-    auctionItem
+    auctionItem,
+    bidders,
   })
 }
 

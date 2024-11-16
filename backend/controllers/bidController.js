@@ -74,7 +74,7 @@ export const placeBid = async(req,res,next)=>{
 
         return res.status(201).json({
             success:true,
-            messae:'Bids placed.',
+            message:'Bids placed.',
             currentBid: auctionItem.currentBid
         });
     } catch (error) {

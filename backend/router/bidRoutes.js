@@ -6,5 +6,4 @@ const router = express.Router();
 
 router.post('/place/:id',isAuthenticated,isAuthorized('Bidder'),checkExpire,placeBid)
 
-
 export default router;

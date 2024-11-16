@@ -9,9 +9,15 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import CommissionProof from './pages/CommissionProof';
 import { useDispatch } from 'react-redux';
-import { GetUser } from './store/slices/userSlice';
+import { fetchLeaderboard, GetUser } from './store/slices/userSlice';
 import HowItWorks from './pages/HowItWorks';
 import About from './pages/About';
+import { getAllAuctionItem } from './store/slices/auctionSlice';
+import Leaderboard from './pages/LeaderBoard';
+import Auctions from './pages/Auctions';
+import AuctionItem from './pages/AuctionItem';
+import CreateAuction from './pages/CreateAuction';
+import ViewMyAuctions from './pages/MyAuction';
 
 
 axios.defaults.baseURL="http://localhost:5000";
@@ -23,6 +29,8 @@ const App = () => {
 
   useEffect(() => {
     dispatch(GetUser());
+    dispatch(getAllAuctionItem());
+    dispatch(fetchLeaderboard());
   }, [])
   
   return (
@@ -35,6 +43,11 @@ const App = () => {
           <Route path='/submit-commission' element={<CommissionProof/>}/>
           <Route path='/how-it-works' element={<HowItWorks/>}/>
           <Route path='/about-us' element={<About/>}/>
+          <Route path='/leaderboard' element={<Leaderboard/>}/>
+          <Route path='/auctions' element={<Auctions/>}/>
+          <Route path='/auction/item/:id' element={<AuctionItem/>}/>
+          <Route path='/create-auction' element={<CreateAuction/>}/>
+          <Route path='/view-auction' element={<ViewMyAuctions/>}/>
       </Routes>
       <ToastContainer position='bottom-right'/>
     </BrowserRouter>

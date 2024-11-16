@@ -10,7 +10,7 @@ router.get("/getall",getAllAuctions);
 router.get("/getauctionitem/:id",isAuthenticated,getAuctionDetails);
 router.get("/getmyauctions",isAuthenticated,getMyAuctions);
 router.delete("/deleteauction/:id",isAuthenticated,isAuthorized("Auctioneer"),deleteAuction);
-router.put ('/republish/:id',isAuthenticated,isAuthorized("Auctioneer"),republishItem);
+router.put('/republish/:id',isAuthenticated,isAuthorized("Auctioneer"),republishItem);
 
 
 export default router;

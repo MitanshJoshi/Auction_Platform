@@ -2,6 +2,9 @@ import Spinner from "@/custom-components/Spinner";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import FeaturedAuctions from "./components/FeaturedAuctions";
+import UpcomingAuctions from "./components/UpcomingAuctions";
+import Leaderboard from "./components/Leaderboard";
 
 const Home = () => {
   const howItWorks = [
@@ -70,6 +73,9 @@ const Home = () => {
             })}
           </div>
         </div>
+        <FeaturedAuctions/>
+        <UpcomingAuctions/>
+        <Leaderboard/>
       </section>
     </>
   );
