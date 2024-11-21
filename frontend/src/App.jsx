@@ -24,7 +24,7 @@ import Contact from './pages/Contact';
 import UserProfile from './pages/UserProfile';
 
 
-axios.defaults.baseURL="http://localhost:5000";
+axios.defaults.baseURL="https://auction-platform-backend.vercel.app";
 axios.defaults.withCredentials=true;
 
 const App = () => {
