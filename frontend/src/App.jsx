@@ -24,7 +24,7 @@ import Contact from './pages/Contact';
 import UserProfile from './pages/UserProfile';
 
 
-axios.defaults.baseURL="https://auction-platform-backend.vercel.app";
+axios.defaults.baseURL="https://auction-platform-backend-3kj4.onrender.com";
 axios.defaults.withCredentials=true;
 
 const App = () => {
