@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { deleteItem, republishItem } from "@/store/slices/auctionSlice";
 // import { deleteAuction, republishAuction } from "@/store/slices/auctionSlice";
 
 const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
@@ -48,7 +49,7 @@ const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
 
   const dispatch = useDispatch();
   const handleDeleteAuction = () => {
-    // dispatch(deleteAuction(id));
+    dispatch(deleteItem(id));
   };
 
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -83,7 +84,7 @@ const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
               <span className="text-[#fdba88] font-bold ml-1">Time's up!</span>
             )}
           </p>
-          <div className="flex gap-1 mt-4">
+          <div className="flex flex-col gap-1 mt-4">
             <Link
               className=" bg-stone-700 text-center text-white text-sm px-1 py-1.5 rounded-md transition-all duration-300 hover:bg-black"
               to={`/auction/details/${id}`}
@@ -122,7 +123,7 @@ const Drawer = ({ setOpenDrawer, openDrawer, id }) => {
     const formData = new FormData();
     formData.append("startTime", startTime);
     formData.append("endTime", endTime);
-    // dispatch(republishAuction(id, formData));
+    dispatch(republishItem(formData,id));
   };
 
   return (

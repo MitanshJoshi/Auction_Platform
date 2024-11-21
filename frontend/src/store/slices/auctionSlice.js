@@ -13,6 +13,24 @@ const auctionSlice = createSlice({
         allAuctions: [],
     },
     reducers:{
+        republishItemRequest(state,action){
+            state.loading = true;
+        },
+        republishItemSuccess(state,action){
+            state.loading=false;
+        },
+        republishItemFailed(state,action){
+            state.loading=false;
+        },
+        deleteItemRequest(state,action){
+            state.loading = true;
+        },
+        deleteItemSuccess(state,action){
+            state.loading=false;
+        },
+        deleteItemFailed(state,action){
+            state.loading=false;
+        },
         getMyAuctionRequest(state,action)
         {
             state.loading = true;
@@ -110,12 +128,47 @@ export const createAuction = (data) => async(dispatch) => {
 
         dispatch(auctionSlice.actions.createAuctionSuccess());
         toast.success(response.data.message);
+        dispatch(getAllAuctionItem());
         dispatch(auctionSlice.actions.resetSlice());
     } catch (error) {
         dispatch(auctionSlice.actions.createAuctionFailed());
-        toast.error(response.data.message);
+        toast.error(error.response.data.message);
         dispatch(auctionSlice.actions.resetSlice());
         
+    }
+}
+
+
+export const deleteItem = (id) => async(dispatch) =>{
+    dispatch(auctionSlice.actions.deleteItemRequest());
+    try {
+        const response = await axios.delete(`/api/v1/auction/deleteauction/${id}`);
+        dispatch(auctionSlice.actions.deleteItemSuccess());
+        toast.success(response.data.message);
+        dispatch(getMyAuctions());
+        dispatch(getAllAuctionItem());
+        dispatch(auctionSlice.actions.resetSlice());
+    } catch (error) {
+        dispatch(auctionSlice.actions.deleteItemFailed());
+        toast.error(error.response.data.message);
+        dispatch(auctionSlice.actions.resetSlice());
+    }
+}
+
+
+export const republishItem = (data,id) => async(dispatch) =>{
+    dispatch(auctionSlice.actions.republishItemRequest());
+    try {
+        const response = await axios.put(`/api/v1/auction/republish/${id}`,data);
+        dispatch(auctionSlice.actions.republishItemSuccess());
+        toast.success(response.data.message);
+        dispatch(getMyAuctions());
+        dispatch(getAllAuctionItem());
+        dispatch(auctionSlice.actions.resetSlice());
+    } catch (error) {
+        dispatch(auctionSlice.actions.republishItemFailed());
+        toast.error(error.response.data.message);
+        dispatch(auctionSlice.actions.resetSlice());
     }
 }
 

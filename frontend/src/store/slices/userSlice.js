@@ -142,12 +142,11 @@ export const login = (data,navigate) => async(dispatch)=>{
 
 }
 
-export const logout = (dispatch,navigate)=> async() =>{
+export const logout = ()=> async(dispatch) =>{
     try {
         const response = await axios.post("/api/v1/user/logout");
         dispatch(userSlice.actions.logoutSuccess());
         toast.success(response.data.message);
-        navigate('/login');
         dispatch(userSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(userSlice.actions.logoutFailed());
@@ -183,7 +182,6 @@ export const fetchLeaderboard=()=>async(dispatch)=>{
         dispatch(userSlice.actions.clearAllErrors());
     }
 }
-
 
 
 export default userSlice.reducer

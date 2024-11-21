@@ -15,10 +15,6 @@ export const verifyCommissionCron = () =>{
         {
             try {
                 const user = await User.findById(proofs.userId);
-                // console.log('proof',proofs);
-                // console.log('user',user);
-                
-                
                 let userData = {};
                 if(user)
                 {

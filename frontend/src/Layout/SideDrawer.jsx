@@ -5,7 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import {MdDashboard, MdLeaderboard} from "react-icons/md"
 import { RiAuctionFill, RiInstagramFill, RiInstanceFill } from "react-icons/ri";
-import { FaEye, FaFacebook, FaFile, FaFileInvoice, FaFileInvoiceDollar } from "react-icons/fa";
+import { FaEye, FaFacebook, FaFile, FaFileInvoice, FaFileInvoiceDollar, FaUserCircle } from "react-icons/fa";
 import { IoIosCreate, IoMdCloseCircleOutline } from "react-icons/io";
 import { SiGooglesearchconsole } from "react-icons/si";
 import { BsFillInfoSquareFill } from "react-icons/bs";
@@ -76,6 +76,16 @@ const SideDrawer = () => {
         }
         <hr className="border-t-[#D6482B]"></hr>
         <ul className="flex flex-col gap-3 mt-4">
+        {isAuthenticated && (
+              <li>
+                <Link
+                  to={"/me"}
+                  className="font-semibold hover:text-[#D6482B] gap-2 items-center flex"
+                >
+                  <FaUserCircle /> Profile
+                </Link>
+              </li>
+            )}
         <li>
           <Link to={'/how-it-works'} className="font-semibold hover:text-[#D6482B] gap-2 items-center flex"><SiGooglesearchconsole/> How it works</Link>
           </li>

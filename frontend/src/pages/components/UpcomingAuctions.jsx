@@ -48,9 +48,9 @@ const UpcomingAuctions = () => {
                     <img
                       src={element.image?.url}
                       alt={element.title}
-                      className="w-16 h-16 2xl:w-10 2xl:h-10"
+                      className="w-16 h-16 2xl:w-10 rounded-md 2xl:h-10"
                     />
-                    <p className="font-extralight text-[#111] text-[12px]">
+                    <p className="font-bold text-[#111] text-[12px]">
                       {element.title}
                     </p>
                   </div>
